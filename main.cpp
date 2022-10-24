@@ -1,13 +1,13 @@
 #include <iostream>
 
-auto main() -> int {
-
+void ax_b_0() {
+  
   double a = 0;
   double b = 0;
 
-  std::cout << "\n\nObliczanie miejsc zerowych funkcji liniowej (ax + b = 0):\n  Podaj [a]: ";
+  std::cout << "\nObliczanie miejsc zerowych funkcji [Ax + B = 0]:\n  Podaj [A]: ";
   std::cin >> a;
-  std::cout << "  Podaj [b]: ";
+  std::cout << "  Podaj [B]: ";
   std::cin >> b;
 
   if (a == 0 && b != 0)
@@ -20,6 +20,57 @@ auto main() -> int {
     double x0 = ((-1)*b)/a;
       std::cout << "\nX0 = " << x0;
   }
+}
+
+
+void ax_by_c_0() {
+  double a = 0;
+  double b = 0;
+  double c = 0;
+
+  std::cout << "\nObliczanie miejsc zerowych funkcji [Ax + By + C = 0]:\n  Podaj [A]: ";
+  std::cin >> a;
+  std::cout << "  Podaj [B]: ";
+  std::cin >> b;
+  std::cout << "  Podaj [C]: ";
+  std::cin >> c;
+
+  if (b == 0 || a == 0) {
+    std::cout << "\n [!] Współczynnik A i B nie może równać się 0.";
+    return;
+  }
+
+  double x0 = (-c/b);
+  double y0 = (-c/a);
+
+  std::cout << "\n x0 = " << x0 << "\n y0 = " << y0;
+
+}
+
+auto main() -> int {
+
+  std::cout << "[Miejsca zerowe funkcji]\n\n Wybierz równanie:\n [1] Ax + B = 0\n [2] Ax + By + C = 0\n\nWybór: ";
+  int choice = 0;
+
+  itemChoose:
+  std::cin >> choice;
+
+  switch(choice) {
+
+    case 1:
+      ax_b_0();
+      break;
+
+    case 2:
+      ax_by_c_0();
+      break;
+      
+    default:
+      std::cout << "\n[!] Wrong option. Try again: ";
+      goto itemChoose;
+      break;
+  }
+
 
   return 0;
 }
