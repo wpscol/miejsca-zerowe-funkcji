@@ -51,7 +51,7 @@ void ax2_by_c_0() {
   double b = 0;
   double c = 0;
 
-  std::cout << "\nObliczanie miejsc zerowych funkcji [Ax^2 + Bx + C = 0] [A != 0]:\n  Podaj [A]: ";
+  std::cout << "\nObliczanie miejsc zerowych funkcji [Ax^2 + Bx + C = 0]:\n  Podaj [A]: ";
   std::cin >> a;
   std::cout << "  Podaj [B]: ";
   std::cin >> b;
@@ -59,7 +59,16 @@ void ax2_by_c_0() {
   std::cin >> c;
 
   if (a == 0) {
-    std::cout << "\n [!] Współczynnik A nie może równać się 0.";
+    if (b == 0 && c != 0)
+      std::cout << "\nBrak miejsca zerowego.";
+
+    else if (b == 0 && c == 0)
+      std::cout << "\nWszystkie liczby rzeczywiste są miejscami zerowymi funkcji.";
+
+    else {
+      double x0 = ((-1) * c) / b;
+      std::cout << "\nX0 = " << x0;
+    }
     return;
   }
 
