@@ -85,6 +85,48 @@ void ax2_by_c_0() {
     std::cout << "\nX1 = " << (((-1) * b) - sqrt(delta)) / (2 * a) << "\nX2 = " << (((-1) * b) + sqrt(delta)) / (2 * a);
 }
 
+void y_a_x_p_2_q() {
+  double a{0};
+  double p{0};
+  double q{0};
+
+  std::cout << "\nObliczanie miejsc zerowych funkcji [Y = A*(X - p)*2 + q]:\n  Podaj [A]: ";
+  std::cin >> a;
+  std::cout << "  Podaj [p]: ";
+  std::cin >> p;
+  std::cout << "  Podaj [q]: ";
+  std::cin >> q;
+
+  double b{2 * a * p};
+  double c{p * p + q};
+
+  if (a == 0) {
+    if (b == 0 && c != 0)
+      std::cout << "\nBrak miejsca zerowego.";
+
+    else if (b == 0 && c == 0)
+      std::cout << "\nWszystkie liczby rzeczywiste są miejscami zerowymi funkcji.";
+
+    else {
+      double x0 = ((-1) * c) / b;
+      std::cout << "\nX0 = " << x0;
+    }
+    return;
+  }
+
+  double delta = (b * b) - 4 * (a * c);
+  std::cout << "\nDelta: " << delta;
+
+  if (delta < 0)
+    std::cout << "\nBrak miejsc zerowych.";
+
+  else if (delta == 0)
+    std::cout << "\nX0 = " << ((-1) * b) / (2 * a);
+
+  else
+    std::cout << "\nX1 = " << (((-1) * b) - sqrt(delta)) / (2 * a) << "\nX2 = " << (((-1) * b) + sqrt(delta)) / (2 * a);
+}
+
 auto main() -> int {
   std::string banner = "---------------------------"
                        "\n|[Miejsca zerowe funkcji]|"
@@ -113,6 +155,10 @@ itemChoose:
 
   case 3:
     ax2_by_c_0();
+    break;
+
+  case 4:
+    y_a_x_p_2_q();
     break;
 
   default:
