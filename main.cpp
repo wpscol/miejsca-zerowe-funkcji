@@ -128,13 +128,14 @@ void y_a_x_p_2_q() {
 }
 
 auto main() -> int {
-  std::string banner = "---------------------------"
-                       "\n|[Miejsca zerowe funkcji]|"
-                       "\n| Wybierz równanie:      |"
-                       "\n| [1] Ax + B = 0         |"
-                       "\n| [2] Ax + By + C = 0    |"
-                       "\n| [3] Ax^2 + Bx + C = 0  |"
-                       "\n--------------------------"
+  std::string banner = " -------------------------"
+                       "\n|[Miejsca zerowe funkcji] |"
+                       "\n| Wybierz równanie:       |"
+                       "\n| [1] Ax + B = 0          |"
+                       "\n| [2] Ax + By + C = 0     |"
+                       "\n| [3] Ax^2 + Bx + C = 0   |"
+                       "\n| [4] Y = A*(X - p)*2 + q |"
+                       "\n -------------------------"
                        "\nWybór: ";
 
   std::cout << banner;
