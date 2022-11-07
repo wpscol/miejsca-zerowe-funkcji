@@ -1,6 +1,24 @@
 #include <cmath>
 #include <iostream>
 
+struct funkcja_kwadratowa {
+  double a = 0;
+  double b = 0;
+  double c = 0;
+  double delta = 0;
+  double p = 0;
+  double q = 0;
+  double x1 = 0;
+  double x2 = 0;
+};
+
+void pokaz_postacie_funkcji(funkcja_kwadratowa& obiekt)
+{
+};
+
+
+
+
 void ax_b_0() {
 
   double a = 0;
@@ -57,6 +75,12 @@ void ax2_by_c_0() {
   std::cin >> b;
   std::cout << "  Podaj [C]: ";
   std::cin >> c;
+  
+    funkcja_kwadratowa wynik;
+    wynik.a = a;
+    wynik.b = b;
+    wynik.c = c;
+  
 
   if (a == 0) {
     if (b == 0 && c != 0)
@@ -83,12 +107,21 @@ void ax2_by_c_0() {
 
   else
     std::cout << "\nX1 = " << (((-1) * b) - sqrt(delta)) / (2 * a) << "\nX2 = " << (((-1) * b) + sqrt(delta)) / (2 * a);
+    
+    wynik.p = ((-1) * (wynik.b)) / (2 * wynik.a);
+    wynik.q = ((-1) * (wynik.delta)) / (4 * wynik.a);
+    pokaz_postacie_funkcji(wynik);
+    
+    
+    
+    
+    
 }
 
 void y_a_x_p_2_q() {
-  double a{0};
-  double p{0};
-  double q{0};
+  double a =0;
+  double p =0 ;
+  double q =0;
 
   std::cout << "\nObliczanie miejsc zerowych funkcji [Y = A*(X - p)*2 + q]:\n  Podaj [A]: ";
   std::cin >> a;
@@ -97,8 +130,14 @@ void y_a_x_p_2_q() {
   std::cout << "  Podaj [q]: ";
   std::cin >> q;
 
-  double b{2 * a * p};
-  double c{p * p + q};
+  double b = (2 * a * p);
+  double c=(p * p + q);
+  
+   funkcja_kwadratowa wynik;
+    wynik.a = a;
+    wynik.b = b;
+    wynik.c = c;
+  
 
   if (a == 0) {
     if (b == 0 && c != 0)
@@ -125,9 +164,37 @@ void y_a_x_p_2_q() {
 
   else
     std::cout << "\nX1 = " << (((-1) * b) - sqrt(delta)) / (2 * a) << "\nX2 = " << (((-1) * b) + sqrt(delta)) / (2 * a);
+    
+    wynik.p = ((-1) * (wynik.b)) / (2 * wynik.a);
+    wynik.q = ((-1) * (wynik.delta)) / (4 * wynik.a);
+    pokaz_postacie_funkcji(wynik);
+
+}
+void iloczynowa() {
+	
+   std::cout << "Obliczanie miejsc zerowych funkcji kwadratowej w postaci f(x)=a(x-x1)(x-x2)" <<  std::endl;
+   std::cout << "Podaj wartosc A :";
+   std::cin >> a;
+   std::cout << "Podaj wartosc X1 : " <<  std::endl;
+   std::cin >> x1;
+   std::cout << "Podaj wartosc X2 : " <<  std::endl;
+   std::cin >> x2;
+
+    funkcja_kwadratowa wynik;
+    wynik.a = a;
+    wynik.x1 = x1;
+    wynik.x2 = x2;
+    wynik.b = ((-1) * wynik.a) * (x1 + x2);
+    wynik.c = wynik.a * wynik.x1 * wynik.x2;
+    wynik.delta = (wynik.b * wynik.b) - 4 * wynik.a * wynik.c;
+    wynik.p = ((-1) * (wynik.b)) / (2 * wynik.a);
+    wynik.q = ((-1) * (wynik.delta)) / (4 * wynik.a);
+    pokaz_postacie_funkcji(wynik);
+
 }
 
-auto main() -> int {
+
+int main()  {
   std::string banner = " -------------------------"
                        "\n|[Miejsca zerowe funkcji] |"
                        "\n| Wybierz równanie:       |"
@@ -161,7 +228,9 @@ itemChoose:
   case 4:
     y_a_x_p_2_q();
     break;
-
+  case 5:
+    iloczynowa();
+    break;
   default:
     std::cout << "\n[!] Wrong option. Try again: ";
     goto itemChoose;
