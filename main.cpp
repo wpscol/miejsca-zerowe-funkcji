@@ -86,9 +86,16 @@ void ax2_by_c_0() {
 }
 
 auto main() -> int {
+  std::string banner = "---------------------------"
+                       "\n|[Miejsca zerowe funkcji]|"
+                       "\n| Wybierz równanie:      |"
+                       "\n| [1] Ax + B = 0         |"
+                       "\n| [2] Ax + By + C = 0    |"
+                       "\n| [3] Ax^2 + Bx + C = 0  |"
+                       "\n--------------------------"
+                       "\nWybór: ";
 
-  std::cout << "[Miejsca zerowe funkcji]\n\n Wybierz równanie:\n [1] Ax + B = 0\n [2] Ax + By + C = 0\n [3] Ax^2 + Bx "
-               "+ C = 0\nWybór: ";
+  std::cout << banner;
   int choice = 0;
 
 itemChoose:
