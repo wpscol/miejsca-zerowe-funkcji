@@ -1,7 +1,7 @@
 #include <cmath>
 #include <iostream>
 
-struct funkcja_kwadratowa {
+struct SquareFunctionValues {
   double a = 0;
   double b = 0;
   double c = 0;
@@ -12,12 +12,46 @@ struct funkcja_kwadratowa {
   double x2 = 0;
 };
 
-void pokaz_postacie_funkcji(funkcja_kwadratowa& obiekt)
-{
+void show_funtions_shapes(SquareFunctionValues& obj) {
+  int choice = '7';
+
+  while (choice != 9) {
+    std::cout << "\n\nPrzekształć postać funkcji na:"
+                 "\n [1] Postać ogólna"
+                 "\n [2] Postać kanoniczna"
+                 "\n [3] Postać iloczynowa\n"
+                 "\n [9] Nie przekształcaj"
+                 "\n\n Wybór: ";
+    std::cin >> choice;
+    switch (choice) {
+
+    // Ax^2 + Bx + C = 0
+    case 1:
+      std::cout << "\n" << obj.a << "X^2 + " << obj.b << "X + " << obj.c << " = 0\n\n";
+      break;
+
+    // Y = A*(X - p)^2 + q
+    case 2:
+      std::cout << "\nY = " << obj.a << "(X - " << obj.p << ")^2 + " << obj.q << "\n\n";
+      break;
+
+    // F(X) = A(X - X1)(X - X2)
+    case 3:
+      if (obj.delta > 0)
+        std::cout << "\n F(X) = " << obj.a << "(X - (" << obj.x1 << "))(X - (" << obj.x2 << "))\n\n";
+      else
+        std::cout << "\n Ta funkcja nie posiada postaci kanonicznej.\n\n";
+      break;
+
+    case 9:
+      break;
+
+    default:
+      std::cout << "\n Wybrano błędną opcję! Spróbuj ponownie: ";
+      break;
+    }
+  }
 };
-
-
-
 
 void ax_b_0() {
 
@@ -65,143 +99,122 @@ void ax_by_c_0() {
 }
 
 void ax2_by_c_0() {
-  double a = 0;
-  double b = 0;
-  double c = 0;
+
+  SquareFunctionValues result;
 
   std::cout << "\nObliczanie miejsc zerowych funkcji [Ax^2 + Bx + C = 0]:\n  Podaj [A]: ";
-  std::cin >> a;
+  std::cin >> result.a;
   std::cout << "  Podaj [B]: ";
-  std::cin >> b;
+  std::cin >> result.b;
   std::cout << "  Podaj [C]: ";
-  std::cin >> c;
-  
-    funkcja_kwadratowa wynik;
-    wynik.a = a;
-    wynik.b = b;
-    wynik.c = c;
-  
+  std::cin >> result.c;
 
-  if (a == 0) {
-    if (b == 0 && c != 0)
+  if (result.a == 0) {
+    if (result.b == 0 && result.c != 0)
       std::cout << "\nBrak miejsca zerowego.";
 
-    else if (b == 0 && c == 0)
+    else if (result.b == 0 && result.c == 0)
       std::cout << "\nWszystkie liczby rzeczywiste są miejscami zerowymi funkcji.";
 
     else {
-      double x0 = ((-1) * c) / b;
-      std::cout << "\nX0 = " << x0;
+      result.x1 = ((-1) * result.c) / result.b;
+      std::cout << "\nX0 = " << result.x1;
     }
+
+    show_funtions_shapes(result);
     return;
   }
 
-  double delta = (b * b) - 4 * (a * c);
-  std::cout << "\nDelta: " << delta;
+  result.delta = (result.b * result.b) - (4 * (result.a * result.c));
+  result.x1 = (((-1) * result.b) - sqrt(result.delta)) / (2 * result.a);
+  result.x2 = (((-1) * result.b) + sqrt(result.delta)) / (2 * result.a);
+  std::cout << "\nDelta: " << result.delta;
 
-  if (delta < 0)
+  if (result.delta < 0)
     std::cout << "\nBrak miejsc zerowych.";
 
-  else if (delta == 0)
-    std::cout << "\nX0 = " << ((-1) * b) / (2 * a);
+  else if (result.delta == 0)
+    std::cout << "\nX0 = " << result.x1;
 
   else
-    std::cout << "\nX1 = " << (((-1) * b) - sqrt(delta)) / (2 * a) << "\nX2 = " << (((-1) * b) + sqrt(delta)) / (2 * a);
-    
-    wynik.p = ((-1) * (wynik.b)) / (2 * wynik.a);
-    wynik.q = ((-1) * (wynik.delta)) / (4 * wynik.a);
-    pokaz_postacie_funkcji(wynik);
-    
-    
-    
-    
-    
+    std::cout << "\nX1 = " << result.x1 << "\nX2 = " << result.x2;
+
+  result.p = ((-1) * (result.b)) / (2 * result.a);
+  result.q = ((-1) * (result.delta)) / (4 * result.a);
+  show_funtions_shapes(result);
 }
 
 void y_a_x_p_2_q() {
-  double a =0;
-  double p =0 ;
-  double q =0;
+  SquareFunctionValues result;
 
-  std::cout << "\nObliczanie miejsc zerowych funkcji [Y = A*(X - p)*2 + q]:\n  Podaj [A]: ";
-  std::cin >> a;
+  std::cout << "\nObliczanie miejsc zerowych funkcji [Y = A*(X - p)^2 + q]:\n  Podaj [A]: ";
+  std::cin >> result.a;
   std::cout << "  Podaj [p]: ";
-  std::cin >> p;
+  std::cin >> result.p;
   std::cout << "  Podaj [q]: ";
-  std::cin >> q;
+  std::cin >> result.q;
 
-  double b = (2 * a * p);
-  double c=(p * p + q);
-  
-   funkcja_kwadratowa wynik;
-    wynik.a = a;
-    wynik.b = b;
-    wynik.c = c;
-  
+  result.b = (2 * result.a * result.p);
+  result.c = (result.p * result.p + result.q);
 
-  if (a == 0) {
-    if (b == 0 && c != 0)
+  if (result.a == 0) {
+    if (result.b == 0 && result.c != 0)
       std::cout << "\nBrak miejsca zerowego.";
 
-    else if (b == 0 && c == 0)
+    else if (result.b == 0 && result.c == 0)
       std::cout << "\nWszystkie liczby rzeczywiste są miejscami zerowymi funkcji.";
 
     else {
-      double x0 = ((-1) * c) / b;
-      std::cout << "\nX0 = " << x0;
+      result.x1 = ((-1) * result.c) / result.b;
+      std::cout << "\nX0 = " << result.x1;
     }
+
+    show_funtions_shapes(result);
     return;
   }
 
-  double delta = (b * b) - 4 * (a * c);
-  std::cout << "\nDelta: " << delta;
+  result.delta = (result.b * result.b) - (4 * (result.a * result.c));
+  result.x1 = (((-1) * result.b) - sqrt(result.delta)) / (2 * result.a);
+  result.x2 = (((-1) * result.b) + sqrt(result.delta)) / (2 * result.a);
+  std::cout << "\nDelta: " << result.delta;
 
-  if (delta < 0)
+  if (result.delta < 0)
     std::cout << "\nBrak miejsc zerowych.";
 
-  else if (delta == 0)
-    std::cout << "\nX0 = " << ((-1) * b) / (2 * a);
+  else if (result.delta == 0)
+    std::cout << "\nX0 = " << result.x1;
 
   else
-    std::cout << "\nX1 = " << (((-1) * b) - sqrt(delta)) / (2 * a) << "\nX2 = " << (((-1) * b) + sqrt(delta)) / (2 * a);
-    
-    wynik.p = ((-1) * (wynik.b)) / (2 * wynik.a);
-    wynik.q = ((-1) * (wynik.delta)) / (4 * wynik.a);
-    pokaz_postacie_funkcji(wynik);
+    std::cout << "\nX1 = " << result.x1 << "\nX2 = " << result.x2;
 
-}
-void iloczynowa() {
-	
-   std::cout << "Obliczanie miejsc zerowych funkcji kwadratowej w postaci f(x)=a(x-x1)(x-x2)" <<  std::endl;
-   std::cout << "Podaj wartosc A :";
-   std::cin >> a;
-   std::cout << "Podaj wartosc X1 : " <<  std::endl;
-   std::cin >> x1;
-   std::cout << "Podaj wartosc X2 : " <<  std::endl;
-   std::cin >> x2;
-
-    funkcja_kwadratowa wynik;
-    wynik.a = a;
-    wynik.x1 = x1;
-    wynik.x2 = x2;
-    wynik.b = ((-1) * wynik.a) * (x1 + x2);
-    wynik.c = wynik.a * wynik.x1 * wynik.x2;
-    wynik.delta = (wynik.b * wynik.b) - 4 * wynik.a * wynik.c;
-    wynik.p = ((-1) * (wynik.b)) / (2 * wynik.a);
-    wynik.q = ((-1) * (wynik.delta)) / (4 * wynik.a);
-    pokaz_postacie_funkcji(wynik);
-
+  show_funtions_shapes(result);
 }
 
+void a_x_x1_x_x2() {
+  SquareFunctionValues result;
+  std::cout << "\nObliczanie miejsc zerowych funkcji [ F(X) = A(X - X1)(X - X2) ]:\n  Podaj [A]: ";
+  std::cin >> result.a;
+  std::cout << "  Podaj [X1]: ";
+  std::cin >> result.x1;
+  std::cout << "  Podaj [X2]: ";
+  std::cin >> result.x2;
 
-int main()  {
+  result.b = ((-1) * result.a) * (result.x1 + result.x2);
+  result.c = result.a * result.x1 * result.x2;
+  result.delta = (result.b * result.b) - 4 * result.a * result.c;
+  result.p = ((-1) * (result.b)) / (2 * result.a);
+  result.q = ((-1) * (result.delta)) / (4 * result.a);
+  show_funtions_shapes(result);
+}
+
+int main() {
   std::string banner = " -------------------------"
                        "\n|[Miejsca zerowe funkcji] |"
                        "\n| Wybierz równanie:       |"
                        "\n| [1] Ax + B = 0          |"
                        "\n| [2] Ax + By + C = 0     |"
                        "\n| [3] Ax^2 + Bx + C = 0   |"
-                       "\n| [4] Y = A*(X - p)*2 + q |"
+                       "\n| [4] Y = A*(X - p)^2 + q |"
                        "\n -------------------------"
                        "\nWybór: ";
 
@@ -228,11 +241,9 @@ itemChoose:
   case 4:
     y_a_x_p_2_q();
     break;
-  case 5:
-    iloczynowa();
-    break;
+
   default:
-    std::cout << "\n[!] Wrong option. Try again: ";
+    std::cout << "\n[!] Błędna opcja. Spróbuj ponownie: ";
     goto itemChoose;
     break;
   }
